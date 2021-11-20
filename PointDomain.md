@@ -9,3 +9,4 @@ First, you will need to point nameservers in your AWS account and create a hoste
 1. Sign in to your Namecheap account.
 
 2. Find Domain List from the left sidebar and click on the Manage button next to your domain name:
+![nm2](https://github.com/danferia/the4techies/blob/main/nm1.PNG?raw=true "nm1")
