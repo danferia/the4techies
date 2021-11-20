@@ -1,0 +1,26 @@
+---
+  - hosts: localhost
+    vars_files:
+        - secure.yml
+  
+    tasks: 
+       - name: Launching EC2 instance
+         ec2:
+           key_name: "aws project 0"
+           instance_type: "t2.micro"
+           image: "ami-0dd0ccab7e2801812"
+           wait: yes 
+           group_id: "sg-01bb63642a3e9f904"
+           count: 1
+           state: present
+           vpc_subnet_id: "subnet-0ca165e7dbfd508c3"
+           assign_public_ip: yes
+           region: "us-east-2b"
+           aws_access_key: "{{ uname }}"
+           aws_secret_key: "{{ pass }}"
+         register: info     
+    
+       - debug:
+               var: info.instances[0].public_ip "3.17.133.64"
+
+  

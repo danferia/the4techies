@@ -1,0 +1,31 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: Install latest version of apache2
+      apt: name=apache2 update_cache=yes state=latest
+  vars:
+    - local_dir: "test"
+    - dest_dir: "/var/www"
+    # Enable the apache2 module rewrite
+    - apache2_module:
+        state: present
+        name: rewrite
+    # Enable the apache2 module headers
+    - apache2_module:
+         state: present
+         name: headers 
+    # Enable the apache2 module expires
+    - apache2_module:
+        state: present
+        name: expires
+    # Enable the apache2 module macro
+    - apache2_module:
+        state: present
+        name: macro
+    # name: restart-apache 2
+     service:
+       name: apache2
+       state: restarted
+
+                                                        ~                                      
