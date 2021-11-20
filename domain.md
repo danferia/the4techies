@@ -27,3 +27,20 @@ Not very techie? Or haven’t bought a domain name before? No worries!
 
 ![D1](https://github.com/danferia/the4techies/blob/main/D1.PNG?raw=true "D1")
 
+#4 Complete your Registrant Information
+
+<h1> Namecheap now shows your username <\h1> 
+
+- Now follow the prompts to complete your registrant information. The Registrant Contact information is important!
+
+They can all be the same, or each one can be different.
+
+
+The Administrative Contact is the person you want to handle the day-to-day stuff like renewing the registration.
+
+The Technical Contact could be the business owner, or the head of the IT or Marketing department.
+
+And the Billing Contact, obviously, is the person who handles accounts receivable.
+
+When you’re finished with all the registrant information, click the “Save and Continue” button, then go ahead and check out.
+
