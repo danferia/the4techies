@@ -25,6 +25,5 @@ Not very techie? Or haven’t bought a domain name before? No worries!
  - Click the dropdown to select a time period, from 1 year to 10. Toggle the auto-renew button if you want to renew your domain name automatically at the end of that time.
  - Namecheap automatically gives you a year of WITHHELDforPRIVACY free when you register a domain name with them. This can cut down on the amount of spam email you’re likely to get. 
 
-
-
+![D1](https://github.com/danferia/the4techies/blob/main/D1.PNG?raw=true "D1")
 
