@@ -4,7 +4,7 @@ Namecheap is one of the most popular domain registrars used by people all around
 
 Not very techie? Or haven’t bought a domain name before? No worries!
 
-#1. Check to make sure your domain name is available
+<h1> #1. Check to make sure your domain name is available </h1>
 
 - First we’re going to see if our preferred domain name is available. Here’s what you first see when you go to Namecheap.com.
 
@@ -18,7 +18,7 @@ Not very techie? Or haven’t bought a domain name before? No worries!
 - I’ve typed in “the4techs” in the space above. They automatically fill in the “www” at the beginning and the “.com” at the end.
  
  
- #2. Add to Shopping Cart
+<h1> #2. Add to Shopping Cart </h1>
  
  - Click the “Add to Cart” button 
  - Click View Cart to see more details.
@@ -27,9 +27,9 @@ Not very techie? Or haven’t bought a domain name before? No worries!
 
 ![D1](https://github.com/danferia/the4techies/blob/main/D1.PNG?raw=true "D1")
 
-#4 Complete your Registrant Information
+<h1> #3 Complete your Registrant Information </h1>
 
-<h1> Namecheap now shows your username </h1> 
+<h4> Namecheap now shows your username </h4> 
 
 - Now follow the prompts to complete your registrant information. The Registrant Contact information is important!
 
