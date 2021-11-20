@@ -8,6 +8,10 @@ Not very techie? Or haven’t bought a domain name before? No worries!
 
 - First we’re going to see if our preferred domain name is available. Here’s what you first see when you go to Namecheap.com.
 - Next, type in the domain name you want to check.
+
+
+![WEP-1](https://github.com/EddyGeee/My-Blog/blob/main/wep-1.png?raw=true "WEP-1")
+
 - I’ve typed in “the4techs” in the space above. They automatically fill in the “www” at the beginning and the “.com” at the end.
   If you don’t want a .com — maybe your site is for a nonprofit so you want .org — you can enter the extension you want, or click the box to select from a list of available top-     level domains.
 
