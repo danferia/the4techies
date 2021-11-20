@@ -29,7 +29,7 @@ Not very techie? Or haven’t bought a domain name before? No worries!
 
 #4 Complete your Registrant Information
 
-<h1> Namecheap now shows your username <\h1> 
+<h1> Namecheap now shows your username <h1> 
 
 - Now follow the prompts to complete your registrant information. The Registrant Contact information is important!
 
