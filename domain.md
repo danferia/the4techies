@@ -17,4 +17,14 @@ Not very techie? Or haven’t bought a domain name before? No worries!
 
 - I’ve typed in “the4techs” in the space above. They automatically fill in the “www” at the beginning and the “.com” at the end.
  
+ 
+ #2. Add to Shopping Cart
+ 
+ - Click the “Add to Cart” button 
+ - Click View Cart to see more details.
+ - Click the dropdown to select a time period, from 1 year to 10. Toggle the auto-renew button if you want to renew your domain name automatically at the end of that time.
+ - Namecheap automatically gives you a year of WITHHELDforPRIVACY free when you register a domain name with them. This can cut down on the amount of spam email you’re likely to get. 
+
+
+
 
