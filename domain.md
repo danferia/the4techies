@@ -10,7 +10,7 @@ Not very techie? Or haven’t bought a domain name before? No worries!
 - Next, type in the domain name you want to check.
 
 
-![WEP-1](https://github.com/EddyGeee/My-Blog/blob/main/wep-1.png?raw=true "WEP-1")
+![nm2](https://github.com/danferia/the4techies/blob/main/nm2.PNG?raw=true "nm2")
 
 - I’ve typed in “the4techs” in the space above. They automatically fill in the “www” at the beginning and the “.com” at the end.
   If you don’t want a .com — maybe your site is for a nonprofit so you want .org — you can enter the extension you want, or click the box to select from a list of available top-     level domains.
