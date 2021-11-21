@@ -1,19 +1,19 @@
+---
 - name: Setting-up webserver
   hosts: localhost
   tasks:
-              
-- name: Installing httpd software
-  package:
-    name: "httpd"
-    state: present
-              
-- name: Copying webpage
-  copy:
-    src: home.html
-    dest: /var/www/html/
-             
-- name: Starting httpd services
-  service:
-    name: "httpd"
-    state: started
-    enabled: yes
+   - name: Installing httpd software
+     package:
+      name: "httpd"
+      state: present
+
+   - name: Copying webpage
+     copy:
+      src: home.html
+      dest: /var/www/html/
+
+   - name: Starting httpd services
+     service:
+      name: "httpd"
+      state: started
+      enabled: yes

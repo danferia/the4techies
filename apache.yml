@@ -24,8 +24,8 @@
         state: present
         name: macro
     # name: restart-apache 2
-     service:
-       name: apache2
-       state: restarted
+      service:
+        name: apache2
+        state: restarted
 
                                                         ~                                      
