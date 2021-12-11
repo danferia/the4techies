@@ -1,56 +1,41 @@
 ---
 - hosts: localhost
   become: true
-  vars_files:
-    - [ "vars/foo.yml", "vars/bar.yml", "vars/default.yml" ]
-
   tasks:
-    - name: Install prerequisites
-      apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
-      loop: [ 'aptitude' ]
 
-    - name: Install Apache
-      apt: name=apache2 update_cache=yes state=latest
+  - name: Start service http, if not running
+    service:
+      name: httpd
+      state: started
 
-    - name: Create document root
-      file:
-        path: "/var/www/{{ http_host }}"
-        state: directory
-        owner: "{{ app_user }}"
-        mode: '0755'
+  - name: Stop service httpd, if running
+    service:
+      name: httpd
+      state: stopped
 
-    - name: Copy index test page
-      template:
-        src: "files/index.html.j2"
-        dest: "/var/www/{{ http_host }}/index.html"
+  - name: Restart service httpd, in all cases
+    service:
+      name: httpd
+      state: restarted
 
-    - name: Set up Apache virtuahHost
-      template:
-        src: "files/apache.conf.j2"
-        dest: "/etc/apache2/sites-available/{{ http_conf }}"
+  - name: Reload service httpd, in all cases
+    service:
+      name: httpd
+      state: reloaded
 
-    - name: Enable new site
-      shell: /usr/sbin/a2ensite {{ http_conf }}
-      notify: Reload Apache
+  - name: Enable service httpd, and not touch the running state
+    service:
+      name: httpd
+      enabled: yes
 
-    - name: Disable default Apache site
-      shell: /usr/sbin/a2dissite 000-default.conf
-      when: disable_default
-      notify: Reload Apache
+  - name: Start service foo, based on running process /usr/bin/foo
+    service:
+      name: foo
+      pattern: /usr/bin/foo
+      state: started
 
-    - name: "UFW - Allow HTTP on port {{ http_port }}"
-      ufw:
-        rule: allow
-        port: "{{ http_port }}"
-        proto: tcp
-
-  handlers:
-    - name: Reload Apache
-      service:
-        name: apache2
-        state: reloaded
-
-    - name: Restart Apache
-      service:
-        name: apache2
-        state: restarted
+  - name: Restart network service for interface eth0
+    service:
+      name: network
+      state: restarted
+      args: etih0
