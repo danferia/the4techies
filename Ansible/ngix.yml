@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  become: yes
+  vars:
+   server_name: 
+  tasks:
+   - name: Latest Ngix Version
+     apt: name=ngix state=latest
+   - name: Start Ngix
+     service:
+      name: ngix
+      state: started
