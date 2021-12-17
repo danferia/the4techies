@@ -4,9 +4,16 @@
   vars:
    server_name: 
   tasks:
+   - name: Install Nginx
+     apt: pkg=ngix state=installed update_cache=true
+     notify:
+      - start nginx
    - name: Latest Ngix Version
      apt: name=ngix state=latest
    - name: Start Ngix
      service:
       name: ngix
       state: started
+   handlers:
+    - name: Start Nginx
+      service: name=nginx state=started
