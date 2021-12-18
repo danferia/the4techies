@@ -6,7 +6,8 @@ bin-release/
 
 # Other files and folders
 .settings/
-
+.terraform/
+.terraform.lock.hcl
 # Executables
 *.swf
 *.air
