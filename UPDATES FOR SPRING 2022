@@ -1,0 +1,30 @@
+Carlos Renteria 
+
+Added configurations to the AWS
+Sec rules to allow HTTP requests, and only certain IP can connect to the EC2
+LAMBDA function policy that stop and start th EC2 using python
+Added trigger functions to the LAMDA function 
+Added a hosted zone using route 53 where the domain was bought on namecheap
+
+Eddy Gonzalez
+
+Better Layout/Theme for Hugo Server 
+Creative Design to site
+Backend/Frontend 
+Conditionally load javascript files
+Use Blog site to add more additional helpful posts
+Add more features
+
+Daniela Feria
+
+Configure Terraform
+Modify:
+  IAM (users, groups, policies, etc)
+  VPC (subnets, Internet Gateways, NAT instances, etc)
+  
+Chibueze Meremikwu
+
+Configure Ngix playbook and Service Deplyment 
+Set EC2, host tags
+Service infrastructure (EC2, Application Load Balancers (ALB), Route53, user keys on the instances, etc)
+
