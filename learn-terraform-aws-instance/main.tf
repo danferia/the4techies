@@ -74,6 +74,12 @@ resource "aws_key_pair" "aws-key" {
 }
 
 resource "aws_instance" "nginx_server" {
+  acl    = "public"
+}
+
+resource "aws_default_vpc" "default"{}
+
+resource "aws_instance" "app_server" {
   ami           = "ami-0629230e074c580f2"
   instance_type = "t2.micro"
 
@@ -101,11 +107,11 @@ resource "aws_instance" "nginx_server" {
    ]
   }
 #Setting up the ssh connection to install nginx server
-connection {
+ connection {
   type        = "ssh"
   host        = self.public_ip
   user        = "ubuntu"
   private_key = file("${var.private_key_path}")
-}
+ }
 
 }
