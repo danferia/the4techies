@@ -1,0 +1,50 @@
+
+
+/* keep the game always in the center */
+body{
+    height: 100%;
+    overflow: hidden; 
+    color: rgb(26, 82, 26);
+    background-color: rgb(110, 107, 107);
+
+}
+    .wrap{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+.wrapper-game{
+flex: 1;
+display: flex;
+justify-content: center;
+align-items: center
+}
+/* background set along with using purple image from list of assets*/
+.main{
+width: 800px;
+height: 600px;
+background: url(images/darkPurple.png);
+animation: scroll-background 5s linear infinite;
+box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+position: relative;
+z-index: -2;
+
+}
+/* have infinite background image max size is 256 px*/
+@keyframes scroll-background { 
+    from {
+        background-position-y: 0px;
+    }
+    to{
+        background-position-y: 256px;
+    }
+}
+/*  header is centered on screen will be black on top  */
+header{
+text-align: center;
+background: rgb(7, 7, 7);
+color: rgb(255, 255, 255);
+padding: 5px;
+
+}
