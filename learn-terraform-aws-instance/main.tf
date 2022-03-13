@@ -19,7 +19,7 @@ resource "aws_s3_bucket" "s3bucket"{
   acl    = "private"
 }
 
-resource "aws_vpc" "nginix-vpc"{
+resource "aws_vpc" "nginx-vpc"{
   cidr_block           = "10.0.0.0/16"
   enable_dns_support   = "true"
   enable_dns_hostnames = "true"
@@ -28,7 +28,7 @@ resource "aws_vpc" "nginix-vpc"{
 }
 
 resource "aws_subnet" "pro-subnet-public" {
-  vpc_id                  = aws_vpc.nginix-vpc.id 
+  vpc_id                  = aws_vpc.nginx-vpc.id 
   route {
     cidr_block              = "10.0.1.0/24"
     map_public_ip_on_launch = "true"
@@ -45,7 +45,7 @@ resource "aws_route_table_association" "prod-crta-public-subnet-1"{
 }
 
 resource "aws_security_group" "ssh-allowed" {
-  vpc_id = aws_vpc.nginix-vpc.id
+  vpc_id = aws_vpc.nginx-vpc.id
   egress {
     from_port   = 0
     to_port     = 0
@@ -70,7 +70,7 @@ resource "aws_security_group" "ssh-allowed" {
 
 resource "aws_key_pair" "aws-key" {
   key_name = "aws-key"
-  public_key = file(var.publiv_key_path) 
+  public_key = file(var.public_key_path) 
 }
 
 resource "aws_instance" "nginx_server" {
