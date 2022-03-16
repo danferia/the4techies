@@ -102,8 +102,8 @@ resource "aws_instance" "app_server" {
   }
   provisioner "remote-exec" {
    inline = [
-     "chmod +x /tmp/nginx.sh",
-     "sudo /tmp/nginx.sh"
+     "sudo amazon-linux-extras install -y nginx",
+     "sudo systemctl start nginx"
    ]
   }
 #Setting up the ssh connection to install nginx server
