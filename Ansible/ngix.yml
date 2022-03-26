@@ -1,18 +1,18 @@
 ---
 - hosts: localhost
-  become: yes
+  become: true
   vars:
    server_name: 
   tasks:
    - name: Install Nginx
-     apt: pkg=ngix state=installed update_cache=true
+     apt: pkg=nginx state=installed update_cache=true
      notify:
       - start nginx
    - name: Latest Ngix Version
-     apt: name=ngix state=latest
-   - name: Start Ngix
+     apt: name= nginx state= latest
+   - name: Start Nginx
      service:
-      name: ngix
+      name: nginx
       state: started
    handlers:
     - name: Start Nginx
