@@ -6,9 +6,9 @@
   tasks:
    - name: Install Nginx
      apt: 
-      pkg: nginx
-      state: installed
-      update_cache: true
+      name: nginx
+      state: latest
+      update_cache: yes
      notify:
       - start nginx
    - name: Latest Ngix Version
