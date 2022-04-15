@@ -1,20 +1,21 @@
 ---
+
 - hosts: localhost
-  become: true
-  vars:
-   server_name: 
+  become: true 
   tasks:
+
    - name: Install Nginx
      apt: 
       name: nginx
       state: latest
       update_cache: yes
-     notify:
-      - start nginx
-   - name: Latest Ngix Version
+     notify: Start nginx
+
+   - name: Latest Nginx Version
      apt: 
       name: nginx 
       state: latest
+  
    - name: Start Nginx
      service:
       name: nginx
