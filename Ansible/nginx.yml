@@ -9,7 +9,7 @@
       name: nginx
       state: latest
       update_cache: yes
-     notify: Start nginx
+     notify: Start Nginx
 
    - name: Latest Nginx Version
      apt: 
