@@ -11,8 +11,11 @@ terraform {
 
 provider "aws" {
   profile = "default"
-  region  = "us-east-2"
+  /*region      = "us-east-2b"
+  access_key  = "my_access_key"
+  secret_key = "my_secret_key"*/
 }
+
 data "aws_ami" "ubuntu" {
   most_recent = true
 
@@ -46,7 +49,6 @@ resource "aws_instance" "web" {
 #
 #Downloads the apache and golang
 packages:
- - apache2
  - golang-go
  - git
 runcmd:
@@ -101,23 +103,18 @@ resource "aws_vpc" "nginx-vpc" {
   enable_classiclink   = "false"
   instance_tenancy     = "default"
 }
-
+/*
 resource "aws_subnet" "pro-subnet-public" {
   vpc_id                  = aws_vpc.nginx-vpc.id
   cidr_block              = "10.0.1.0/24"
   map_public_ip_on_launch = "true"
-  availability_zone       = "us-east-2"
+  availability_zone       = "us-east-2b"
   tags = {
     Name = "prod-public-crt"
   }
 }
 
-resource "aws_route_table_association" "prod-crta-public-subnet" {
-  subnet_id      = aws_subnet.pro-subnet-public.id
-  route_table_id = aws_route_table.prod-public-crt.vpc_id
-}
-
-/*resource "aws_security_group" "ssh-allowed" {
+resource "aws_security_group" "ssh-allowed" {
   vpc_id = aws_vpc.nginx-vpc.id
   egress {
     from_port   = 0
@@ -139,12 +136,13 @@ resource "aws_route_table_association" "prod-crta-public-subnet" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-}*/
+}
 
 resource "aws_key_pair" "aws-key" {
   key_name   = "aws-key"
   public_key = file(var.public_key_path)
 }
+
 resource "aws_instance" "app_server" {
   ami           = "ami-0fb653ca2d3203ac1"
   instance_type = "t2.micro"
@@ -153,18 +151,6 @@ resource "aws_instance" "app_server" {
     Name = "nginx_server"
     Name = var.instance_name
   }
-  #VPC
-  subnet_id = aws_subnet.pro-subnet-public.id
-
-  #Security Group
-  vpc_security_group_ids = ["${aws_security_group.ssh-allowed.id}"]
-
-  #The Public SSH Key
-
-  key_name = aws_key_pair.aws-key.id
-
-  #Nginx 
-  #Setting up the ssh connection to install nginx server
   connection {
     type        = "ssh"
     host        = self.public_ip
@@ -172,4 +158,4 @@ resource "aws_instance" "app_server" {
     private_key = file("${var.private_key_path}")
   }
 
-}
+}*/

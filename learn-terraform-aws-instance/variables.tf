@@ -1,7 +1,7 @@
-variable "aws_region" {
-  description = "AWS region"
+variable "instance_name" {
+  description = " Value of the name tag"
   type        = string
-  default     = "us-east-2"
+  default     = "cit480 "
 }
 
 variable "vpc_cidr_block" {
