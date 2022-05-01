@@ -9,17 +9,15 @@ variable "vpc_cidr_block" {
   type        = string
   default     = "10.0.0.0/16" #vpc subnets
 }
-
-/* variable "public_cidr_blocks" {
-  description = "Available cidr blocks for public subnets"
-  type        = list(any)
-  default     = { "10.0.1.0/24", "10.0.2.0/24" }
+variable"ami" {
+  description = "ID of the AMI instance"
+  type = string
+  default = " "
 }
-
- variable "private_cidr_blocks" {
-  description = "Available cidr blocks for private subnets"
-  type        = list(any)
-  default     = { "10.0.3.0/24", "10.0.4.0/24" }
+/*
+variable "vpc_id" {
+  description = "The ID of the VPC that the instance security group belongs to"
+  type        = string
 }*/
 
 variable "instances_per_subnet" {
@@ -31,7 +29,7 @@ variable "instances_per_subnet" {
 variable "instance_type" {
   description = "Instance type for EC2 instances"
   type        = string
-  default     = "t2.micro"
+  default     = "t3.micro"
 }
 
 variable "private_key_path" {
