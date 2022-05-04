@@ -44,63 +44,71 @@ packages:
 runcmd:
  - mkdir /home/ubuntu/go
  - export GOPATH=/home/ubuntu/go
- - go get github.com/hashicorp/lear-go-webapp-demo
+ - go get github.com/hashicorp/learn-go-webapp-demo
 EOT
-  security_groups = [aws_security_group.allow_tls.name]
+  security_groups = [aws_security_group.s22cit481.name]
 
   tags = {
     Name = "${var.env}"
   }
 }
 
-resource "aws_security_group" "allow_tls" {
-  name        = "allow_tls"
+resource "aws_security_group" "s22cit481" {
+  name        = "s22cit481"
   description = "Allow TLS inbound traffic"
-  vpc_id      = "vpc-032f0daef058f8e09"
+  vpc_id      = aws_vpc.main.id
 
   ingress {
-    description = "ssh"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    description      = "Inbound Rules for VPC"
+    from_port        = 443
+    to_port          = 443
+    protocol         = "tcp"
+    cidr_blocks      = [aws_vpc.main.cidr_block]
   }
 
   ingress {
-    description = "http"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    description      = "Inbound Rules for VPC HTTP"
+    from_port        = 80
+    to_port          = 80
+    protocol         = "tcp"
+    cidr_blocks      = [aws_vpc.main.cidr_block]
+  }
+
+  ingress {
+    description      = "Inbound Rules for VPC"
+    from_port        = 22
+    to_port          = 22
+    protocol         = "tcp"
+    cidr_blocks      = [aws_vpc.main.cidr_block]
   }
 
   egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    from_port        = 0
+    to_port          = 0
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
   }
 
   tags = {
-    Name = "s22-cit481"
+    Name = "s22cit481"
   }
 }
 # Subnets
-resource "aws_vpc" "my_vpc" {
+resource "aws_vpc" "main" {
   cidr_block = "172.16.0.0/16"
-
+  
   tags = {
-    Name = "tf-example"
+    Name = "main"
   }
 }
 
 resource "aws_subnet" "my_subnet" {
-  vpc_id            = aws_vpc.my_vpc.id
+  vpc_id            = aws_vpc.main.id
   cidr_block        = "172.16.10.0/24"
   availability_zone = "us-east-2c"
 
   tags = {
-    Name = "tf-example"
+    Name = "Subnet_481"
   }
 }
 
@@ -114,7 +122,7 @@ resource "aws_network_interface" "foo" {
 }
 
 resource "aws_instance" "foo" {
-  ami           = "ami-0c7478fd229861c57" # us-east-2
+  ami           = "ami-0aeb7c931a5a61206" # us-east-2
   instance_type = "t2.micro"
 
   network_interface {
