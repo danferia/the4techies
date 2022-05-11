@@ -9,16 +9,22 @@ variable "vpc_cidr_block" {
   type        = string
   default     = "10.0.0.0/16" #vpc subnets
 }
-variable"ami" {
+variable "ami" {
   description = "ID of the AMI instance"
-  type = string
-  default = " "
+  type        = string
+  default     = " "
 }
-/*
+
 variable "vpc_id" {
   description = "The ID of the VPC that the instance security group belongs to"
   type        = string
-}*/
+  name ="Project 1"
+}
+
+variable "security_group_id" {
+  description = "Security group ID"
+  type        = string
+}
 
 variable "instances_per_subnet" {
   description = "Number of EC2 instances per private subnet"

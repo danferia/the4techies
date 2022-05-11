@@ -1,2 +1,3 @@
 variable "namespace" {
   type = string
+}

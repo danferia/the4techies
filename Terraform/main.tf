@@ -10,12 +10,15 @@ terraform {
 }
 
 provider "aws" {
-  profile = "default"
+  version = "~> 3.27"
   region  = "us-east-2"
 }
-#userdata AWS
+
+
+#userdata AWS Resource AWS_Instance
 data "aws_ami" "ubuntu" {
   most_recent = true
+
 
   filter {
     name   = "name"
@@ -30,7 +33,6 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 
 }
-
 resource "aws_instance" "web" {
   ami             = data.aws_ami.ubuntu.id
   instance_type   = "t3.micro"
@@ -39,6 +41,7 @@ resource "aws_instance" "web" {
 #cloud-config
 #Downloads the and golang
 packages:
+ - apache2
  - golang-go
  - git
 runcmd:
@@ -46,69 +49,67 @@ runcmd:
  - export GOPATH=/home/ubuntu/go
  - go get github.com/hashicorp/learn-go-webapp-demo
 EOT
-  security_groups = [aws_security_group.s22cit481.name]
+  security_groups = [aws_security_group.allow_tls.name]
 
   tags = {
     Name = "${var.env}"
   }
 }
-
-resource "aws_security_group" "s22cit481" {
-  name        = "s22cit481"
+#Security Groups used in User Data
+resource "aws_security_group" "allow_tls" {
+  name        = "allow_tls"
   description = "Allow TLS inbound traffic"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = data.aws_vpc.selected.id
 
   ingress {
-    description      = "Inbound Rules for VPC"
+    description      = "TLS from VPC"
     from_port        = 443
     to_port          = 443
     protocol         = "tcp"
-    cidr_blocks      = [aws_vpc.main.cidr_block]
+    cidr_blocks      = [data.aws_vpc.selected.cidr_block]
   }
 
   ingress {
-    description      = "Inbound Rules for VPC HTTP"
+    description      = "TLS from VPC HTTP"
     from_port        = 80
     to_port          = 80
     protocol         = "tcp"
-    cidr_blocks      = [aws_vpc.main.cidr_block]
+    cidr_blocks      = [data.aws_vpc.selected.cidr_block]
   }
 
   ingress {
-    description      = "Inbound Rules for VPC"
+    description      = "TLS from VPC SSH"
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
-    cidr_blocks      = [aws_vpc.main.cidr_block]
+    cidr_blocks      = ["0.0.0.0/0"]
   }
 
   egress {
     from_port        = 0
     to_port          = 0
-    protocol         = "tcp"
+    protocol         = "-1"
     cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
   }
 
   tags = {
-    Name = "s22cit481"
+    Name = "allow_tls"
   }
 }
-# Subnets
-resource "aws_vpc" "main" {
-  cidr_block = "172.16.0.0/16"
-  
-  tags = {
-    Name = "main"
-  }
-}
+#VPC user Data
 
+data "aws_vpc" "selected" {
+  id = var.vpc_id
+}
+#resource VPC/Subnet
 resource "aws_subnet" "my_subnet" {
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = "172.16.10.0/24"
+  vpc_id            = data.aws_vpc.selected.id
   availability_zone = "us-east-2c"
+  cidr_block        = cidrsubnet(data.aws_vpc.selected.cidr_block, 4, 1)
 
   tags = {
-    Name = "Subnet_481"
+    Name = "Subnet"
   }
 }
 
@@ -122,8 +123,8 @@ resource "aws_network_interface" "foo" {
 }
 
 resource "aws_instance" "foo" {
-  ami           = "ami-0aeb7c931a5a61206" # us-east-2
-  instance_type = "t2.micro"
+  ami           = "ami-0aeb7c931a5a61206" # us-east-2c
+  instance_type = "t3.micro"
 
   network_interface {
     network_interface_id = aws_network_interface.foo.id
@@ -134,74 +135,3 @@ resource "aws_instance" "foo" {
     cpu_credits = "unlimited"
   }
 }
-
-/*
-#code_deploy
-resource "aws_iam_role" "example" {
-  name = "example-role"
-
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "",
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "codedeploy.amazonaws.com"
-      },
-      "Action": "sts:AssumeRole"
-    }
-  ]
-}
-EOF
-}
-
-resource "aws_iam_role_policy_attachment" "AWSCodeDeployRole" {
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole"
-  role       = aws_iam_role.example.name
-}
-
-resource "aws_codedeploy_app" "example" {
-  name = "example-app"
-}
-
-resource "aws_sns_topic" "example" {
-  name = "example-topic"
-}
-
-resource "aws_codedeploy_deployment_group" "example" {
-  app_name              = aws_codedeploy_app.example.name
-  deployment_group_name = "the4techies-group"
-  service_role_arn      = aws_iam_role.example.arn
-
-  ec2_tag_set {
-    ec2_tag_filter {
-      key   = "filterkey1"
-      type  = "KEY_AND_VALUE"
-      value = "filtervalue"
-    }
-
-    ec2_tag_filter {
-      key   = "filterkey2"
-      type  = "KEY_AND_VALUE"
-      value = "filtervalue"
-    }
-  }
-
-  trigger_configuration {
-    trigger_events     = ["DeploymentFailure"]
-    trigger_name       = "s22-trigger"
-    trigger_target_arn = aws_sns_topic.example.arn
-  }
-
-  auto_rollback_configuration {
-    enabled = true
-    events  = ["DEPLOYMENT_FAILURE"]
-  }
-
-  alarm_configuration {
-    alarms  = ["my-alarm-name"]
-    enabled = true
-  }
-}*/
