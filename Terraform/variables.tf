@@ -18,12 +18,16 @@ variable "ami" {
 variable "vpc_id" {
   description = "The ID of the VPC that the instance security group belongs to"
   type        = string
-  name ="Project 1"
 }
 
 variable "security_group_id" {
   description = "Security group ID"
   type        = string
+}
+
+variable "subnet_id" {
+  description = " Subnet ID"
+  type = string  
 }
 
 variable "instances_per_subnet" {

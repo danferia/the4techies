@@ -82,7 +82,7 @@ resource "aws_security_group" "allow_tls" {
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    cidr_blocks      = [data.aws_vpc.selected.cidr_block]
   }
 
   egress {
@@ -101,37 +101,4 @@ resource "aws_security_group" "allow_tls" {
 
 data "aws_vpc" "selected" {
   id = var.vpc_id
-}
-#resource VPC/Subnet
-resource "aws_subnet" "my_subnet" {
-  vpc_id            = data.aws_vpc.selected.id
-  availability_zone = "us-east-2c"
-  cidr_block        = cidrsubnet(data.aws_vpc.selected.cidr_block, 4, 1)
-
-  tags = {
-    Name = "Subnet"
-  }
-}
-
-resource "aws_network_interface" "foo" {
-  subnet_id   = aws_subnet.my_subnet.id
-  private_ips = ["172.16.10.100"]
-
-  tags = {
-    Name = "primary_network_interface"
-  }
-}
-
-resource "aws_instance" "foo" {
-  ami           = "ami-0aeb7c931a5a61206" # us-east-2c
-  instance_type = "t3.micro"
-
-  network_interface {
-    network_interface_id = aws_network_interface.foo.id
-    device_index         = 0
-  }
-
-  credit_specification {
-    cpu_credits = "unlimited"
-  }
 }
