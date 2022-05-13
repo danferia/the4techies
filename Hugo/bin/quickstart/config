@@ -1,0 +1,10 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+[submodule "hugo-coder"]
+	url = https://github.com/luizdepra/hugo-coder.git
+	active = true
