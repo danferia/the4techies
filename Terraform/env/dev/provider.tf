@@ -4,6 +4,6 @@ provider "aws" {
 }
 
 module "the4techies" {
-  source = "../../main.tf"
+  source = "../../modules"
   env    = "dev"
 }
