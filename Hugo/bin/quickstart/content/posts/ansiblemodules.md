@@ -8,7 +8,7 @@ Today's post, will discuss the utility of Ansible and other similar tools provid
 
 <h3>Using Proper Ansible Modules</h3>
 
-**Note**: I'll be using a Docker container running Ubuntu 18.04 but this playbook is compatible with local systems or cloud computing instances running Ubuntu. Just ensure that localhost and any other proper ports are accessible. 
+**Note**: We'll be using a Docker container running Ubuntu 18.04 but this playbook is compatible with local systems or cloud computing instances running Ubuntu. Just ensure that localhost and any other proper ports are accessible. 
 
 Aside from understanding the finicky nature of Ansible's syntax, you'll want to start by understanding the modules. For this example, we'll be using a module that runs the test application on localhost.
 
